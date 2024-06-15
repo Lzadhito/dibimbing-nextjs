@@ -1,9 +1,8 @@
 import FoodCard from "@/components/FoodCard";
 import axios from "axios";
-import { useRouter } from "next/router";
 
 export async function getServerSideProps(context) {
-  const resp = await axios.get("https://api-bootcamp.do.dibimbing.id/api/v1/foods", {
+  const resp = await axios.get(`https://api-bootcamp.do.dibimbing.id/api/v1/foods/${context.params.id}`, {
     headers: {
       apiKey: "w05KkI9AWhKxzvPFtXotUva-",
       "Content-Type": "application/json",
@@ -12,18 +11,9 @@ export async function getServerSideProps(context) {
     },
   });
   const data = resp.data.data;
-  return { props: { foods: data } };
+  return { props: { food: data } };
 }
 
-export default function PostDetail({ foods }) {
-  const router = useRouter();
-  return (
-    <div>
-      <ul className="space-y-2 flex gap-4 flex-wrap">
-        {foods.map((food) => (
-          <FoodCard food={food} />
-        ))}
-      </ul>
-    </div>
-  );
+export default function FoodDetails({ food }) {
+  return <FoodCard food={food} />;
 }
