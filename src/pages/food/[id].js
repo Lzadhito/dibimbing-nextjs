@@ -1,4 +1,6 @@
 import FoodCard from "@/components/FoodCard";
+import FoodForm from "@/components/FoodForm";
+import BaseLayout from "@/layouts/BaseLayout";
 import axios from "axios";
 
 export async function getServerSideProps(context) {
@@ -15,5 +17,12 @@ export async function getServerSideProps(context) {
 }
 
 export default function FoodDetails({ food }) {
-  return <FoodCard food={food} />;
+  return (
+    <BaseLayout>
+      <div className="flex flex-col items-center">
+        <FoodCard food={food} />
+        <FoodForm isEdit={true} defaultFormData={{ name: food.name, imageUrl: food.imageUrl }} />
+      </div>
+    </BaseLayout>
+  );
 }

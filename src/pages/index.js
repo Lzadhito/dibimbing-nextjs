@@ -1,4 +1,5 @@
 import FoodCard from "@/components/FoodCard";
+import BaseLayout from "@/layouts/BaseLayout";
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -18,12 +19,12 @@ export async function getServerSideProps(context) {
 export default function PostDetail({ foods }) {
   const router = useRouter();
   return (
-    <div>
+    <BaseLayout>
       <ul className="space-y-2 flex gap-4 flex-wrap">
         {foods.map((food) => (
           <FoodCard food={food} />
         ))}
       </ul>
-    </div>
+    </BaseLayout>
   );
 }
